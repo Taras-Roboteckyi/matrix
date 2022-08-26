@@ -5,14 +5,14 @@ import App from './App';
 /* import { PersistGate } from 'redux-persist/integration/react'; */
 /* import { Provider } from 'react-redux'; */
 import { ThemeProvider } from 'styled-components';
-import { COLORS } from './constans/ColorConstans';
+import { Constants } from './constans/Constans';
 import { GlobalStyles } from './GlobalStyle.styled';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <Provider store={store}> */}
     {/* <PersistGate loading={null} persistor={persistor}> */}
-    <ThemeProvider theme={{ colors: COLORS }}>
+    <ThemeProvider theme={Constants}>
       <GlobalStyles />
       <App />
     </ThemeProvider>
