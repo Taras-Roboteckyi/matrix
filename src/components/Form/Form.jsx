@@ -34,8 +34,9 @@ export const Form = () => {
       range: '',
     },
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: values => {
       /* await dispatch(authOperations.register(values)) */
+      console.log(values);
     },
   });
 
