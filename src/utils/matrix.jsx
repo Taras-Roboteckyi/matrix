@@ -1,11 +1,13 @@
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { ItemsSelectors } from '../redux/items';
 
 export default function Matrix() {
   const dispatch = useDispatch();
-
-  const line = 2;
-  const column = 3;
+  const dataForm = useSelector(ItemsSelectors.getDataForm);
+  console.log('dataForm : ', dataForm);
+  const line = dataForm.row;
+  const column = dataForm.column;
   /* const x = 3; */
   let result = [];
 
@@ -19,6 +21,7 @@ export default function Matrix() {
         result[m][n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 0) + 0) }; //Створюєм значення amount
       }
     }
+    console.log('matrixBasis: ', result);
     return result;
   };
 
@@ -38,7 +41,7 @@ export default function Matrix() {
       tempArray[rowMatrix] = averageValue; // записуємо в тимчасовий масив
     }
 
-    result = [...result, { averageV: tempArray }]; // розпиляємо і додаємо масив з середнім арифметичним
+    result = [...result, { averageValues: tempArray }]; // розпиляємо і додаємо масив з середнім арифметичним
 
     /* console.log('averageValue: ', result); */
     return result;
@@ -67,8 +70,12 @@ export default function Matrix() {
     return result;
   };
 
-  console.log('matrix: ', matrixBasis());
+  matrixBasis();
+  average();
+  sum();
+
+  /* console.log('matrix: ', matrixBasis());
   console.log('average: ', average());
-  console.log('sum: ', sum());
+  console.log('sum: ', sum()); */
   return result;
 }

@@ -1,4 +1,4 @@
-export const dataMatrix = state => state.line;
+export const getDataForm = state => state.items.data;
 export const getFilter = state => state.contacts.filter;
 
 /* export const getVisibleItems = state => {

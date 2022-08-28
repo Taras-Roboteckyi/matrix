@@ -1,11 +1,11 @@
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Section } from './Form.Styled';
-/* import { useDispatch } from 'react-redux'; */
-/* import { authOperations } from '../../redux/authorization'; */
+import { useDispatch } from 'react-redux';
+import { ItemsSlice } from '../../redux/items';
 
 export const Form = () => {
-  /* const dispatch = useDispatch(); */
+  const dispatch = useDispatch();
 
   const validationSchema = Yup.object({
     row: Yup.number()
@@ -34,9 +34,8 @@ export const Form = () => {
       range: '',
     },
     validationSchema,
-    onSubmit: values => {
-      /* await dispatch(authOperations.register(values)) */
-      console.log(values);
+    onSubmit: async values => {
+      await dispatch(ItemsSlice.dataForm(values));
     },
   });
 
