@@ -11,6 +11,7 @@
     "nanoid": "^4.0.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
+    "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",

@@ -1,14 +1,16 @@
 import { createSlice, combineReducers } from '@reduxjs/toolkit';
 
+const initialState = {
+  line: [],
+  average: [],
+};
+
 const itemsReducer = createSlice({
-  name: 'items',
-  initialState: 20,
+  name: 'matrix',
+  initialState,
   reducers: {
-    add(state, action) {
-      state.push(action.payload);
-    },
-    remove(state, action) {
-      return state.filter(item => item.id !== action.payload); //Немутуєм стейт через filter, тому return треба
+    creation: (state, action) => {
+      state.line = [...action.payload];
     },
   },
 });
