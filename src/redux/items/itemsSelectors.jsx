@@ -1,5 +1,5 @@
 export const getDataForm = state => state.items.data;
-export const getDataMatrix = state => state.items.line;
+export const getDataMatrixLine = state => state.items.line;
 
 /* export const getVisibleItems = state => {
   const items = getItems(state);

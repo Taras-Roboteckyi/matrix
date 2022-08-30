@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types'; */
 
 import { useSelector } from 'react-redux';
 import { ItemsSelectors } from '../../redux/items';
@@ -22,29 +22,28 @@ export function TableHeader() {
   );
 }
 
-export function TableBody(props) {
-  const dataMatrix = useSelector(ItemsSelectors.getDataMatrix);
-  console.log(dataMatrix);
+export function TableBody() {
+  const dataMatrixLine = useSelector(ItemsSelectors.getDataMatrixLine);
+  console.log('dataMatrixLine ', dataMatrixLine);
 
   return (
     <tbody>
-      {/*  {props.items.map(({ id, type, amount, currency }) => (
-        <TableRow key={id} row={{ type, amount, currency }} />
-      ))} */}
+      {dataMatrixLine.map((line, index) => (
+        <TableRow key={index} row={line} />
+      ))}
     </tbody>
   );
 }
 
 function TableRow(props) {
-  const { type, amount, currency } = props.row;
+  const { row } = props;
 
-  return (
-    <TransactionRow>
-      <TransactionItem>{type}</TransactionItem>
+  return row.map(({ id, amount, sum }) => (
+    <TransactionRow key={id}>
       <TransactionItem>{amount}</TransactionItem>
-      <TransactionItem>{currency}</TransactionItem>
+      <TransactionItem>{sum}</TransactionItem>
     </TransactionRow>
-  );
+  ));
 }
 
 /* TableBody.propTypes = {

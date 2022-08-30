@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import Matrix from '../utils/matrix';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch /* , useSelector  */ } from 'react-redux';
 
 import { ItemsSlice } from '../redux/items';
 import { Form } from '../components/Form/Form';
@@ -17,7 +17,7 @@ export default function HomePage() {
     dispatch(ItemsSlice.dataMatrix(dataMatrix));
   }, [dataMatrix, dispatch]);
 
-  console.log(dataMatrix);
+  /*  console.log(dataMatrix); */
   return (
     <>
       <Form />
