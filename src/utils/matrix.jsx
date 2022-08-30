@@ -1,11 +1,15 @@
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { ItemsSelectors } from '../redux/items';
 
 export default function Matrix() {
-  const dispatch = useDispatch();
   const dataForm = useSelector(ItemsSelectors.getDataForm);
-  console.log('dataForm : ', dataForm);
+
+  /*  console.log('dataForm : ', dataForm); */
+
+  useEffect(() => {}, []);
+
   const line = dataForm.row;
   const column = dataForm.column;
   /* const x = 3; */
@@ -21,7 +25,7 @@ export default function Matrix() {
         result[m][n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 0) + 0) }; //Створюєм значення amount
       }
     }
-    console.log('matrixBasis: ', result);
+    /* console.log('matrixBasis: ', result); */
     return result;
   };
 
@@ -77,5 +81,6 @@ export default function Matrix() {
   /* console.log('matrix: ', matrixBasis());
   console.log('average: ', average());
   console.log('sum: ', sum()); */
+
   return result;
 }

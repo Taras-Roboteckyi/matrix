@@ -13,13 +13,14 @@ const itemsReducer = createSlice({
     dataForm: (state, action) => {
       state.data = action.payload;
     },
-    creation: (state, action) => {
-      state.line = [...action.payload];
+    dataMatrix: (state, action) => {
+      console.log(action);
+      /* state.line = [...action.payload]; */
     },
   },
 });
 
-export const { dataForm, creation } = itemsReducer.actions;
+export const { dataForm, dataMatrix } = itemsReducer.actions;
 
 export const reducer = combineReducers({
   items: itemsReducer.reducer,
