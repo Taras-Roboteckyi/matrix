@@ -22,7 +22,7 @@ export default function Matrix() {
       result[m] = [];
 
       for (let n = 0; n < column; n++) {
-        result[m][n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 0) + 0) }; //Створюєм значення amount
+        result[m][n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 1) + 1) }; //Створюєм значення amount
       }
     }
     /* console.log('matrixBasis: ', result); */

@@ -1,5 +1,6 @@
 export const getDataForm = state => state.items.data;
 export const getDataMatrixLine = state => state.items.line;
+export const getDataMatrixAverage = state => state.items.average;
 
 /* export const getVisibleItems = state => {
   const items = getItems(state);

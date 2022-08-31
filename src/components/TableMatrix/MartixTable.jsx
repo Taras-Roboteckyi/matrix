@@ -1,4 +1,5 @@
-import { TableHeader, TableBody } from './MartixTableHead';
+import { TableHeader } from './MartixTableHead';
+import { TableBody } from './MatrixTableBody';
 
 import { Container, MatrixHead } from './MartixTable.styled';
 

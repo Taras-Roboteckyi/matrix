@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  /* width: 1024px; */
+  display: flex;
+  justify-content: center;
   padding-bottom: 80px;
+  padding-left: 100px;
+  padding-right: 100px;
 `;
 
 export const MatrixHead = styled.table`
@@ -28,4 +33,11 @@ export const TransactionHeadItem = styled.th`
 `;
 export const TableHeaderStyle = styled.thead`
   background-color: lightblue;
+`;
+
+export const AvarageItem = styled.th`
+  width: 100px;
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  background-color: ${({ theme: { colors } }) => colors.$orange}; ;
 `;
