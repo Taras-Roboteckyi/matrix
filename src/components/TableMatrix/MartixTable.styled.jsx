@@ -45,3 +45,15 @@ export const AvarageItem = styled.th`
   border: 1px solid #2a2a2a;
   background-color: ${({ theme: { colors } }) => colors.$yellow}; ;
 `;
+
+export const AmountItem = styled.td`
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  text-align: center;
+`;
+
+export const SumItem = styled.td`
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  text-align: center;
+`;

@@ -1,5 +1,5 @@
 import { useDispatch /* , useSelector  */ } from 'react-redux';
-import { TransactionItem } from './MartixTable.styled';
+import { AmountItem, SumItem } from './MartixTable.styled';
 import { ItemsSlice } from '../../redux/items';
 
 export function TableItem(props) {
@@ -10,11 +10,11 @@ export function TableItem(props) {
   return (
     <>
       {amount && (
-        <TransactionItem /* onClick={() => dispatch(ItemsSlice.increment(id))} */>
+        <AmountItem /* onClick={() => dispatch(ItemsSlice.increment(props.rowItem))} */>
           {amount}
-        </TransactionItem>
+        </AmountItem>
       )}
-      {sum && <TransactionItem>{sum}</TransactionItem>}
+      {sum && <SumItem>{sum}</SumItem>}
     </>
   );
 }
