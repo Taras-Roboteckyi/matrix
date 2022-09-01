@@ -8,6 +8,9 @@ import { TransactionRow, TransactionHeadItem, TableHeaderStyle } from './MartixT
 export function TableHeader() {
   const dataMatrixLine = useSelector(ItemsSelectors.getDataMatrixLine);
 
+  if (dataMatrixLine.length === 0) {
+    return null;
+  }
   const lineIndexArray = data => [...data[0]];
 
   const lineIndex = lineIndexArray(dataMatrixLine);
@@ -16,9 +19,10 @@ export function TableHeader() {
   return (
     <TableHeaderStyle>
       <TransactionRow>
-        {lineIndex.map((_, index) => (
-          <TransactionHeadItem key={index}>{index}</TransactionHeadItem>
-        ))}
+        {lineIndex &&
+          lineIndex.map((_, index) => (
+            <TransactionHeadItem key={index}>{index}</TransactionHeadItem>
+          ))}
         <TransactionHeadItem>Сума по рядку</TransactionHeadItem>
       </TransactionRow>
     </TableHeaderStyle>

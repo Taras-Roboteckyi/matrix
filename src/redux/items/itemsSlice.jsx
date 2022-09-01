@@ -4,6 +4,7 @@ const initialState = {
   data: { row: null, column: null, range: null },
   line: [],
   average: '',
+  isVisible: false,
 };
 
 const itemsReducer = createSlice({
@@ -17,6 +18,7 @@ const itemsReducer = createSlice({
       /* console.log(action); */
       state.line = action.payload.slice(0, action.payload.length - 1);
       state.average = action.payload[action.payload.length - 1];
+      state.isVisible = true;
     },
   },
 });

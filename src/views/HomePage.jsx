@@ -1,15 +1,13 @@
 import { useEffect } from 'react';
 import Matrix from '../utils/matrix';
-import { useDispatch /* , useSelector  */ } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { ItemsSlice } from '../redux/items';
+import { ItemsSlice, ItemsSelectors } from '../redux/items';
 import { Form } from '../components/Form/Form';
 import MatrixTable from '../components/TableMatrix/MartixTable';
 
 export default function HomePage() {
-  /* const dispatch = useDispatch(); */
-  /* const isRefetchingPage = useSelector(authSelectors.getRefetchingPage); */
-  //console.log(isRefetchingPage);
+  const data = useSelector(ItemsSelectors.getDataForm);
   const dispatch = useDispatch();
   const dataMatrix = Matrix();
 
@@ -17,11 +15,11 @@ export default function HomePage() {
     dispatch(ItemsSlice.dataMatrix(dataMatrix));
   }, [dataMatrix, dispatch]);
 
-  /*  console.log(dataMatrix); */
+  /* console.log(data); */
   return (
     <>
       <Form />
-      <MatrixTable />
+      {data.row && <MatrixTable />}
     </>
   );
 }
