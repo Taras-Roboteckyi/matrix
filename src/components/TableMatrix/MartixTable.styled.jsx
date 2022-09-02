@@ -50,6 +50,7 @@ export const AmountItem = styled.td`
   padding: 10px;
   border: 1px solid #2a2a2a;
   text-align: center;
+  cursor: pointer;
 `;
 
 export const SumItem = styled.td`

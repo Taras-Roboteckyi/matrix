@@ -10,7 +10,7 @@ export function TableItem(props) {
   return (
     <>
       {amount && (
-        <AmountItem /* onClick={() => dispatch(ItemsSlice.increment(props.rowItem))} */>
+        <AmountItem onClick={() => dispatch(ItemsSlice.increment(props.rowItem))}>
           {amount}
         </AmountItem>
       )}
