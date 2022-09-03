@@ -1,5 +1,4 @@
 import { createSlice, combineReducers } from '@reduxjs/toolkit';
-import { nanoid } from 'nanoid';
 
 const initialState = {
   data: { row: null, column: null, range: null },
@@ -15,33 +14,35 @@ const itemsReducer = createSlice({
     dataForm: (state, action) => {
       state.data = action.payload;
     },
+
     dataMatrix: (state, action) => {
-      state.matrix = action.payload;
       console.log('dataMatrix', action.payload);
       state.line = action.payload.slice(0, action.payload.length - 1);
       state.average = action.payload[action.payload.length - 1];
-      /*  state.amountNumber = {
-        ...action.payload.slice(0, action.payload.length - 1).map(item => {
-          return item.map(({ amount }) => amount + 1);
-        }),
-      };
-      console.log(state.amountNumber); */
     },
+
     increment: (state, action) => {
-      console.log(action.payload);
-      const newRow = state.line.find((_, index) => index === action.payload.indexRow);
+      state.line[action.payload.indexRow] = state.line
+        .find((_, index) => index === action.payload.indexRow)
+        .map(element => {
+          const newAmount = element.id === action.payload.id ? element.amount + 1 : element.amount;
 
-      const newItemRow = newRow.map(element => {
-        const newAmount = element.id === action.payload.id ? element.amount + 1 : element.amount;
+          if (element.sum) {
+            element.sum += 1;
+          }
+          return { ...element, amount: newAmount };
+        });
 
-        if (element.sum) {
-          element.sum += 1;
-        }
-        return { ...element, amount: newAmount };
-      });
-      state.line[action.payload.indexRow] = newItemRow;
-
-      /* state.average = [...state.average] */
+      state.average.averageValues[action.payload.indexColumn] = Number(
+        state.line
+          .map(line => {
+            return line.find((_, index) => index === action.payload.indexColumn);
+          })
+          .reduce((total, { amount }) => {
+            return total + amount / state.line.length;
+          }, 0)
+          .toFixed(2),
+      );
     },
   },
 });
