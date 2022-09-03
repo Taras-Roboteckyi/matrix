@@ -4,13 +4,17 @@ import { ItemsSlice } from '../../redux/items';
 
 export function TableItem(props) {
   const dispatch = useDispatch();
-  const { amount, sum, id } = props.rowItem;
-  /* console.log(id); */
+  const { rowItem, tableItemIndex, tableRowIndex } = props;
+  const { amount, sum } = rowItem;
+
+  /* console.log('props.tableItemIndex ', tableItemIndex);
+  console.log('props.rowItem ', rowItem); */
+  const dataTableItem = { ...rowItem, indexColumn: tableItemIndex, indexRow: tableRowIndex };
 
   return (
     <>
       {amount && (
-        <AmountItem onClick={() => dispatch(ItemsSlice.increment(props.rowItem))}>
+        <AmountItem onClick={() => dispatch(ItemsSlice.increment(dataTableItem))}>
           {amount}
         </AmountItem>
       )}

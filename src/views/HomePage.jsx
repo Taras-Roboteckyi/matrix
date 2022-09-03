@@ -15,7 +15,7 @@ export default function HomePage() {
     dispatch(ItemsSlice.dataMatrix(dataMatrix));
   }, [dataMatrix, dispatch]);
 
-  console.log('dataMatrix', dataMatrix);
+  /* console.log('dataMatrix', dataMatrix); */
   return (
     <>
       <Form />

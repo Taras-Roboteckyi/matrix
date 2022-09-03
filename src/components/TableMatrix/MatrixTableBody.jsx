@@ -30,8 +30,8 @@ function TableRow(props) {
     <TransactionRow>
       {<AvarageItem>{increment(index)}</AvarageItem>}
 
-      {row.map(row => (
-        <TableItem key={row.id} rowItem={row} />
+      {row.map((row, indexItem) => (
+        <TableItem key={row.id} rowItem={row} tableItemIndex={indexItem} tableRowIndex={index} />
       ))}
     </TransactionRow>
   );

@@ -5,7 +5,7 @@ const initialState = {
   data: { row: null, column: null, range: null },
   line: [],
   average: '',
-  amountNumber: null,
+  matrix: null,
 };
 
 const itemsReducer = createSlice({
@@ -16,7 +16,8 @@ const itemsReducer = createSlice({
       state.data = action.payload;
     },
     dataMatrix: (state, action) => {
-      /* console.log(action.payload); */
+      state.matrix = action.payload;
+      console.log('dataMatrix', action.payload);
       state.line = action.payload.slice(0, action.payload.length - 1);
       state.average = action.payload[action.payload.length - 1];
       /*  state.amountNumber = {
@@ -27,14 +28,19 @@ const itemsReducer = createSlice({
       console.log(state.amountNumber); */
     },
     increment: (state, action) => {
-      /* console.log(action.payload); */
-      state.line = state.line.map(el =>
-        el.map(element => {
-          const newAmount = element.id === action.payload.id ? element.amount + 1 : element.amount;
-          console.log(newAmount);
-          return { ...element, amount: newAmount };
-        }),
-      );
+      console.log(action.payload);
+      const newRow = state.line.find((_, index) => index === action.payload.indexRow);
+
+      const newItemRow = newRow.map(element => {
+        const newAmount = element.id === action.payload.id ? element.amount + 1 : element.amount;
+
+        if (element.sum) {
+          element.sum += 1;
+        }
+        return { ...element, amount: newAmount };
+      });
+      state.line[action.payload.indexRow] = newItemRow;
+
       /* state.average = [...state.average] */
     },
   },
