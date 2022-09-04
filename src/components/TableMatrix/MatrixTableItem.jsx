@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 import { useDispatch /* , useSelector  */ } from 'react-redux';
 import { AmountItem, SumItem } from './MartixTable.styled';
 import { ItemsSlice } from '../../redux/items';
 
 export function TableItem(props) {
+  const [isHoverTdTable, setIsHoverTdTable] = useState(null);
   const dispatch = useDispatch();
   const { rowItem, tableItemIndex, tableRowIndex } = props;
   const { amount, sum } = rowItem;
@@ -16,7 +18,11 @@ export function TableItem(props) {
   return (
     <>
       {amount && (
-        <AmountItem onClick={() => dispatch(ItemsSlice.increment(dataTableItem))}>
+        <AmountItem
+          onClick={() => dispatch(ItemsSlice.increment(dataTableItem))}
+          /* onMouseEnter={handleMouseEnter} */
+          onMouseLeave={() => setIsHoverTdTable(null)}
+        >
           {amount}
         </AmountItem>
       )}
