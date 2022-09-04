@@ -34,8 +34,15 @@ export const Form = () => {
       range: '',
     },
     validationSchema,
-    onSubmit: async values => {
+    onSubmit: async (values, actions) => {
       await dispatch(ItemsSlice.dataForm(values));
+      actions.resetForm({
+        values: {
+          row: '',
+          column: '',
+          range: '',
+        },
+      });
     },
   });
 

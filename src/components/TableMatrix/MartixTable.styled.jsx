@@ -18,6 +18,7 @@ export const MatrixHead = styled.table`
 `;
 
 export const TransactionRow = styled.tr`
+  position: relative;
   padding: 10px;
   border: 1px solid #2a2a2a;
   :nth-child(even) {
@@ -26,6 +27,7 @@ export const TransactionRow = styled.tr`
 `;
 
 export const TransactionItem = styled.td`
+  width: 50px;
   padding: 10px;
   border: 1px solid #2a2a2a;
   text-align: center;
@@ -39,7 +41,7 @@ export const TableHeaderStyle = styled.thead`
   background-color: lightblue;
 `;
 
-export const AvarageItem = styled.th`
+export const AverageItem = styled.th`
   width: 100px;
   padding: 10px;
   border: 1px solid #2a2a2a;
@@ -57,4 +59,13 @@ export const SumItem = styled.td`
   padding: 10px;
   border: 1px solid #2a2a2a;
   text-align: center;
+`;
+
+export const Total = styled.td`
+  font-weight: bold;
+  width: 50px;
+  padding: 10px;
+  border: 1px solid #2a2a2a;
+  text-align: center;
+  background-color: ${({ theme: { colors } }) => colors.$yellow};
 `;

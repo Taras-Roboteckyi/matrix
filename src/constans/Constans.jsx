@@ -21,6 +21,7 @@ export const Constants = {
     $black: '#212121',
     borderColor: '#E0E0E0',
     $yellow: '#ffff00',
+    $red: '#ff0000',
   },
 
   spacing: value => `${4 * value}px`,

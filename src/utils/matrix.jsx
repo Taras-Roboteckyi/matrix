@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid';
-import { useEffect } from 'react';
+/* import { useEffect } from 'react'; */
 import { useSelector } from 'react-redux';
 import { ItemsSelectors } from '../redux/items';
 
@@ -8,7 +8,7 @@ export default function Matrix() {
 
   /*  console.log('dataForm : ', dataForm); */
 
-  useEffect(() => {}, []);
+  /*  useEffect(() => {}, []); */
 
   const line = dataForm.row;
   const column = dataForm.column;
@@ -84,3 +84,18 @@ export default function Matrix() {
 
   return result;
 }
+
+export const totalMatrix = data => {
+  return data
+    .map(line =>
+      line.reduce((sum, element) => {
+        if (element.sum) {
+          return sum + element.sum;
+        }
+        return sum;
+      }, 0),
+    )
+    .reduce((total, element) => {
+      return total + element;
+    }, 0);
+};

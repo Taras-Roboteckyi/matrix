@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useDispatch /* , useSelector  */ } from 'react-redux';
 import { AmountItem, SumItem } from './MartixTable.styled';
 import { ItemsSlice } from '../../redux/items';
@@ -22,3 +24,14 @@ export function TableItem(props) {
     </>
   );
 }
+
+TableItem.propTypes = {
+  rowItem: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    amount: PropTypes.number,
+    sum: PropTypes.number,
+  }),
+
+  tableItemIndex: PropTypes.number.isRequired,
+  tableRowIndex: PropTypes.number.isRequired,
+};
