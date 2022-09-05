@@ -52,48 +52,58 @@ export const Form = () => {
 
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="container-input">
-          <input
-            name="row"
-            className="form-input"
-            placeholder="К-сть Рядків *"
-            type="number"
-            autoComplete="off"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur('row')}
-            value={formik.values.row}
-          />
+          <label className="label-input">
+            Кількість рядків:
+            <input
+              label="first name"
+              name="row"
+              className="form-input"
+              placeholder="К-сть Рядків *"
+              type="number"
+              autoComplete="off"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur('row')}
+              value={formik.values.row}
+            />
+          </label>
           {formik.touched.row && formik.errors.row ? (
             <p className="form-input-error">{formik.errors.row}</p>
           ) : null}
         </div>
 
         <div className="container-input">
-          <input
-            name="column"
-            className="form-input"
-            placeholder="К-сть Колонок *"
-            type="number"
-            autoComplete="off"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur('column')}
-            value={formik.values.column}
-          />
+          <label className="label-input">
+            Кількість колонок:
+            <input
+              name="column"
+              className="form-input"
+              placeholder="К-сть Колонок *"
+              type="number"
+              autoComplete="off"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur('column')}
+              value={formik.values.column}
+            />
+          </label>
           {formik.touched.column && formik.errors.column ? (
             <p className="form-input-error">{formik.errors.column}</p>
           ) : null}
         </div>
 
         <div className="container-input">
-          <input
-            name="range"
-            className="form-input"
-            placeholder="Х - діапазон *"
-            type="number"
-            autoComplete="off"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur('range')}
-            value={formik.values.range}
-          />
+          <label className="label-input">
+            X-діапазон:
+            <input
+              name="range"
+              className="form-input"
+              placeholder="Х - діапазон *"
+              type="number"
+              autoComplete="off"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur('range')}
+              value={formik.values.range}
+            />
+          </label>
           {formik.touched.range && formik.errors.range ? (
             <p className="form-input-error">{formik.errors.range}</p>
           ) : null}

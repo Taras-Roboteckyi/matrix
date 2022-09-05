@@ -1,27 +1,45 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import { useDispatch /* , useSelector  */ } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { ItemsSlice, ItemsSelectors } from '../../redux/items';
+
 import { AmountItem, SumItem } from './MartixTable.styled';
-import { ItemsSlice } from '../../redux/items';
 
 export function TableItem(props) {
-  const [isHoverTdTable, setIsHoverTdTable] = useState(null);
-  const dispatch = useDispatch();
-  const { rowItem, tableItemIndex, tableRowIndex } = props;
-  const { amount, sum } = rowItem;
+  const [isHoverAmount, setIsHoverAmount] = useState(null);
 
-  /* console.log('props.tableItemIndex ', tableItemIndex);
-  console.log('props.rowItem ', rowItem); */
+  const dataMatrix = useSelector(ItemsSelectors.getDataMatrixLine);
+
+  const dispatch = useDispatch();
+
+  const { rowItem, tableItemIndex, tableRowIndex } = props;
+  const { amount, sum, id } = rowItem;
   const dataTableItem = { ...rowItem, indexColumn: tableItemIndex, indexRow: tableRowIndex };
+
+  const handleMouseEnterAmount = idAmount => {
+    console.log(idAmount);
+    console.log('dataMatrix', dataMatrix);
+    const a = dataMatrix
+      .reduce((allTags, item) => {
+        allTags.push(...item);
+
+        return allTags;
+      }, [])
+      .filter(({ amount }) => amount)
+      .sort((firstAmount, secondStudent) => firstAmount.amount - secondStudent.amount);
+    console.log(a);
+    return a;
+  };
 
   return (
     <>
       {amount && (
         <AmountItem
           onClick={() => dispatch(ItemsSlice.increment(dataTableItem))}
-          /* onMouseEnter={handleMouseEnter} */
-          onMouseLeave={() => setIsHoverTdTable(null)}
+          onMouseEnter={() => handleMouseEnterAmount(id)}
+          onMouseLeave={() => setIsHoverAmount(null)}
         >
           {amount}
         </AmountItem>

@@ -85,6 +85,8 @@ export default function Matrix() {
   return result;
 }
 
+///////Знаходим загальну суму рядків матриці///////////////
+
 export const totalMatrix = data => {
   return data
     .map(line =>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Section = styled.section`
   margin: 0 auto;
-  padding: 40px 0px;
+  padding: 60px 0px;
 
   font-family: ${prop => prop.theme.fonts.$verdana};
   font-style: normal;
@@ -35,11 +35,16 @@ export const Section = styled.section`
     height: 60px;
     width: 220px;
   }
-
+  .label-input {
+    font-size: 18px;
+    font-weight: 700;
+    font-style: normal;
+    color: ${({ theme: { colors } }) => colors.$orange};
+  }
   .form-input {
     height: 40px;
     width: 150px;
-
+    margin-top: 10px;
     padding-left: 20px;
     text-align: center;
     border: 2px solid #fc842d;
@@ -65,6 +70,7 @@ export const Section = styled.section`
 
   .buttons {
     height: 60px;
+    padding-top: 60px;
 
     .button {
       width: 182px;
