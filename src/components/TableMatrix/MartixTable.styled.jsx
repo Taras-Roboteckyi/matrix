@@ -53,6 +53,8 @@ export const AmountItem = styled.td`
   border: 1px solid #2a2a2a;
   text-align: center;
   cursor: pointer;
+
+  color: ${props => (props.activeClassName ? ' red;' : ' blue;')};
 `;
 
 export const SumItem = styled.td`

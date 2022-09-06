@@ -6,7 +6,7 @@ export function TableRow(props) {
 
   const increment = indexNumber => indexNumber + 1;
   /* console.log(index); */
-
+  console.log(row);
   /* const dataTableIndex = { indexColumn: tableItemIndex, indexRow: tableRowIndex }; */
   return (
     <>
