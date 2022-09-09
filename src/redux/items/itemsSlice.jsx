@@ -5,6 +5,8 @@ const initialState = {
   line: [],
   average: '',
   matrix: null,
+  totalSum: false,
+  hover: null,
 };
 
 const itemsReducer = createSlice({
@@ -45,6 +47,9 @@ const itemsReducer = createSlice({
           }, 0)
           .toFixed(2),
       );
+      state.average.averageValues[state.average.averageValues.length - 1] = {
+        totalSum: state.average.averageValues[state.average.averageValues.length - 1].totalSum + 1,
+      };
     },
 
     deleteRow: (state, { payload }) => {
@@ -69,12 +74,38 @@ const itemsReducer = createSlice({
         tempArray[column] = Number((sum / filter.length).toFixed(2));
       }
 
-      state.average.averageValues = [...tempArray];
+      state.average.averageValues = [
+        ...tempArray,
+
+        (state.average.averageValues[state.average.averageValues.length - 1] = {
+          totalSum: state.line
+            .map(line =>
+              line.reduce((sum, element) => {
+                if (element.sum) {
+                  return sum + element.sum;
+                }
+                return sum;
+              }, 0),
+            )
+            .reduce((total, element) => {
+              return total + element;
+            }, 0),
+        }),
+      ];
+    },
+
+    /*  addTotalSum: (state, { payload }) => {
+      console.log(payload.totalSum + 1);
+      state.totalSum = payload.totalSum + 1;
+    }, */
+    hoverAmount: (state, { payload }) => {
+      state.hover = payload;
     },
   },
 });
 
-export const { dataForm, dataMatrix, increment, deleteRow } = itemsReducer.actions;
+export const { dataForm, dataMatrix, increment, deleteRow, addTotalSum, hoverAmount } =
+  itemsReducer.actions;
 
 export const reducer = combineReducers({
   items: itemsReducer.reducer,

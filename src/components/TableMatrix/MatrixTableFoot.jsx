@@ -1,25 +1,37 @@
 import PropTypes from 'prop-types';
+/* import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react'; */
 
-import { totalMatrix } from '../../utils/matrix';
+/* import { totalMatrix } from '../../utils/matrix'; */
+/* import { ItemsSlice, ItemsSelectors } from '../../redux/items'; */
 
 import { TransactionRow, TransactionItem, AverageItem, Total } from './MartixTable.styled';
 
 export function TableFoot(props) {
+  /* const totalSum = useSelector(ItemsSelectors.getTotalSum); */
+  /* const dispatch = useDispatch(); */
   const averageValues = props.footer;
-  const dataMatrixTable = props.dataMatrix;
+  /* const dataMatrixTable = props.dataMatrix; */
+
+  /* const total = totalMatrix(dataMatrixTable); */
+  const total = averageValues[averageValues.length - 1];
+
+  /* useEffect(() => {
+    dispatch(ItemsSlice.addTotalSum(total));
+  }, [dispatch, total]); */
+
   /* console.log('averageValues', averageValues); */
   const textAverage = 'Середнє значення по стовчиках';
 
-  const total = totalMatrix(dataMatrixTable);
-  /* console.log(total); */
+  /*  console.log('total', total); */
 
   return (
     <TransactionRow>
-      {averageValues.length > 0 && <AverageItem>{textAverage}</AverageItem>}
-      {averageValues.map((row, index) => (
+      {averageValues.length > 1 && <AverageItem>{textAverage}</AverageItem>}
+      {averageValues.slice(0, averageValues.length - 1).map((row, index) => (
         <TableFootItem key={index} footItem={row} />
       ))}
-      {averageValues.length > 0 && <Total>Загальна сума: {total}</Total>}
+      {averageValues.length > 1 && <Total>Загальна сума: {total.totalSum}</Total>}
     </TransactionRow>
   );
 }

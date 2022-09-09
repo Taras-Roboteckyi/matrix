@@ -49,17 +49,27 @@ export const AverageItem = styled.th`
 `;
 
 export const AmountItem = styled.td`
+  /* padding: 10px; */
+
+  border: 1px solid #2a2a2a;
+  text-align: center;
+  cursor: pointer;
+
+  color: ${props => (props.activeClassName ? 'red' : 'black')};
+`;
+
+/* export const AmountItemHover = styled.td`
   padding: 10px;
   border: 1px solid #2a2a2a;
   text-align: center;
   cursor: pointer;
 
-  color: ${props => (props.activeClassName ? ' red;' : ' blue;')};
-`;
+  color: blue;
+`; */
 
-export const SumItem = styled.td`
+export const SumItem = styled.div`
   padding: 10px;
-  border: 1px solid #2a2a2a;
+  /* border: 1px solid #2a2a2a; */
   text-align: center;
 `;
 

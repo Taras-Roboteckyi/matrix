@@ -29,30 +29,6 @@ export default function Matrix() {
     return result;
   };
 
-  //////Знаходим середнє значення стовчиків матриці/////////
-
-  const average = () => {
-    let tempArray = []; // тимчасова змінна зовні обявлена зовні області розрахунків (або стейт, як в мене по логіці)
-
-    for (let rowMatrix = 0; rowMatrix < column; rowMatrix += 1) {
-      let average = 0;
-
-      for (let row = 0; row < line; row += 1) {
-        /* console.log('average: ', result); */
-        average += result[row][rowMatrix].amount; //вказує поле по якому рахуєш
-      }
-      const averageValue = Number((average / result.length).toFixed(2));
-      tempArray[rowMatrix] = averageValue; // записуємо в тимчасовий масив
-    }
-
-    result = [...result, { averageValues: tempArray }]; // розпиляємо і додаємо масив з середнім арифметичним
-
-    /* console.log('averageValue: ', result); */
-    return result;
-  };
-
-  /* console.log('matrix: ', result) */
-
   ///////Знаходим суму рядків матриці///////////////
 
   const sum = () => {
@@ -74,9 +50,52 @@ export default function Matrix() {
     return result;
   };
 
+  //////Знаходим середнє значення стовчиків матриці/////////
+
+  const average = () => {
+    let tempArray = []; // тимчасова змінна зовні обявлена зовні області розрахунків (або стейт, як в мене по логіці)
+
+    for (let rowMatrix = 0; rowMatrix < column; rowMatrix += 1) {
+      let average = 0;
+
+      for (let row = 0; row < line; row += 1) {
+        /* console.log('average: ', result); */
+        average += result[row][rowMatrix].amount; //вказує поле по якому рахуєш
+      }
+      const averageValue = Number((average / result.length).toFixed(2));
+      tempArray[rowMatrix] = averageValue; // записуємо в тимчасовий масив
+    }
+
+    ///////Знаходим загальну суму рядків матриці///////////////
+
+    const totalMatrix = data => {
+      return data
+        .map(line =>
+          line.reduce((sum, element) => {
+            if (element.sum) {
+              return sum + element.sum;
+            }
+            return sum;
+          }, 0),
+        )
+        .reduce((total, element) => {
+          return total + element;
+        }, 0);
+    };
+    const Total = totalMatrix(result);
+    /* console.log('Total', Total); */
+
+    result = [...result, { averageValues: [...tempArray, { totalSum: Total }] }]; // розпиляємо і додаємо масив з середнім арифметичним і загальну суму
+
+    /* console.log('averageValue: ', result); */
+    return result;
+  };
+
+  /* console.log('matrix: ', result) */
+
   matrixBasis();
-  average();
   sum();
+  average();
 
   /* console.log('matrix: ', matrixBasis());
   console.log('average: ', average());
@@ -84,20 +103,3 @@ export default function Matrix() {
 
   return result;
 }
-
-///////Знаходим загальну суму рядків матриці///////////////
-
-export const totalMatrix = data => {
-  return data
-    .map(line =>
-      line.reduce((sum, element) => {
-        if (element.sum) {
-          return sum + element.sum;
-        }
-        return sum;
-      }, 0),
-    )
-    .reduce((total, element) => {
-      return total + element;
-    }, 0);
-};

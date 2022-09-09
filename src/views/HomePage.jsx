@@ -14,6 +14,9 @@ export default function HomePage() {
   useEffect(() => {
     dispatch(ItemsSlice.dataMatrix(dataMatrix));
   }, [dataMatrix, dispatch]);
+  /* if (dataMatrix.length === 1) {
+    return null;
+  } */
 
   /* console.log('dataMatrix', dataMatrix); */
   return (
