@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import Matrix from '../utils/matrix';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Matrix from '../utils/matrix';
+import HeroSection from '../components/HeroSection/HeroSection';
 import { ItemsSlice, ItemsSelectors } from '../redux/items';
 import { Form } from '../components/Form/Form';
 import MatrixTable from '../components/TableMatrix/MartixTable';
@@ -21,6 +22,7 @@ export default function HomePage() {
   /* console.log('dataMatrix', dataMatrix); */
   return (
     <>
+      <HeroSection />
       <Form />
       {data.row && <MatrixTable />}
     </>

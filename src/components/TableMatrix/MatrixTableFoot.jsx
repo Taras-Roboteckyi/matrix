@@ -11,16 +11,16 @@ export function TableFoot(props) {
   /* const totalSum = useSelector(ItemsSelectors.getTotalSum); */
   /* const dispatch = useDispatch(); */
   const averageValues = props.footer;
+  const totalSum = props.totalSum;
   /* const dataMatrixTable = props.dataMatrix; */
 
   /* const total = totalMatrix(dataMatrixTable); */
-  const total = averageValues[averageValues.length - 1];
 
   /* useEffect(() => {
     dispatch(ItemsSlice.addTotalSum(total));
   }, [dispatch, total]); */
 
-  /* console.log('averageValues', averageValues); */
+  console.log('averageValues', averageValues);
   const textAverage = 'Середнє значення по стовчиках';
 
   /*  console.log('total', total); */
@@ -31,7 +31,7 @@ export function TableFoot(props) {
       {averageValues.slice(0, averageValues.length - 1).map((row, index) => (
         <TableFootItem key={index} footItem={row} />
       ))}
-      {averageValues.length > 1 && <Total>Загальна сума: {total.totalSum}</Total>}
+      {averageValues.length > 1 && <Total>Загальна сума: {totalSum.totalSum}</Total>}
     </TransactionRow>
   );
 }

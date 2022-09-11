@@ -5,7 +5,15 @@ import { TableRow } from './MatrixTableRow';
 import { TableFoot } from './MatrixTableFoot';
 import ButtonDelete from '../ButtonDelete/ButtonDelete';
 
-import { TransactionRow, AverageItem, AmountItem, SumItem } from './MartixTable.styled';
+import {
+  TransactionRow,
+  AverageItem,
+  AmountItem,
+  SumItem,
+  AmountContainer,
+  SumItemContainer,
+  PercentItem,
+} from './MartixTable.styled';
 
 export function TableBody() {
   const dataMatrixLine = useSelector(ItemsSelectors.getDataMatrixLine);
@@ -17,6 +25,8 @@ export function TableBody() {
   /* const totalSum = useSelector(ItemsSelectors.getTotalSum); */
   const dispatch = useDispatch();
   /* const line = row.slice(0, row.length - 1); */
+
+  const total = averageValues[averageValues.length - 1]; /////Знаходим загальну суму матриці
 
   const increment = indexNumber => indexNumber + 1; //Додаєм нумерацію клітинок-ячейок
 
@@ -52,7 +62,7 @@ export function TableBody() {
       if (item.id === idAmount) {
         return arr;
       } else {
-        const differenceAmounts = Math.abs(item.amount - electIdAmount.amount);
+        const differenceAmounts = Math.abs(item.amount - electIdAmount?.amount);
         const newAmount = { ...item, different: differenceAmounts }; //додаєм різницю чисел щоб знайти необхідні числа
         //delete newAmount.amount;
         //console.log('arr', arr);
@@ -72,25 +82,7 @@ export function TableBody() {
 
     //return newArrayOnMouseEnter;
   };
-
-  ////////////Шукаєм новий масив і //додаєм нову властивість обєкта на тих ячейках які найближчі до підсвіченої клітинки
-
-  /* const findNewArray = () => {
-    return arrayMatrix.map(el => {
-      const hoveredObject = isHoverAmount?.find(({ id }) => id === el.id); // return object or undefined
-
-      if (!hoveredObject) {
-        return { ...el, isHovered: false };
-      }
-
-      return { ...hoveredObject, isHovered: true };
-    });
-  }; */
-
-  /* const b = findNewArray();
-
-  console.log('b()', b); */
-  /* console.log('findNewArray', findNewArray()); */
+  console.log('isHoverAmount', isHoverAmount);
 
   return (
     <tbody>
@@ -106,40 +98,43 @@ export function TableBody() {
         <TransactionRow key={index}>
           {<AverageItem>{increment(index)}</AverageItem>}
           {line.map((row, indexItem) => (
-            /*  <TableItem
-            key={row.id}
-            rowItem={row}
-            tableItemIndex={indexItem}
-            tableRowIndex={index}
-            mouseEnter={mouseEnter}
-            mouseLeave={mouseLeave}
-            hover={hover}
-          /> */
-
-            <AmountItem
-              key={indexItem}
-              onClick={() =>
-                dispatch(
-                  ItemsSlice.increment({
-                    ...row,
-                    indexColumn: indexItem,
-                    indexRow: index,
-                  }),
-                )
-              }
-              onMouseEnter={() => handleMouseEnterAmount(row.id)}
-              onMouseLeave={() => setIsHoverAmount(null)}
-              activeClassName={isHoverAmount?.find(({ id }) => id === row.id)}
-            >
-              {row.amount}
-              {row.sum && <SumItem>{row.sum}</SumItem>}
+            <AmountItem key={row.id}>
+              {row.amount && (
+                <AmountContainer
+                  key={row.id}
+                  onClick={() =>
+                    dispatch(
+                      ItemsSlice.increment({
+                        ...row,
+                        indexColumn: indexItem,
+                        indexRow: index,
+                      }),
+                    )
+                  }
+                  onMouseEnter={() => handleMouseEnterAmount(row.id)}
+                  onMouseLeave={() => setIsHoverAmount(null)}
+                  activeClassName={isHoverAmount?.find(({ id }) => id === row.id)}
+                >
+                  {row.amount}
+                </AmountContainer>
+              )}
+              {row.sum && (
+                <SumItemContainer>
+                  <SumItem /* key={indexItem} */>
+                    {row.sum}
+                    <PercentItem calc={(row.sum / total.totalSum) * 100}>
+                      {Math.ceil((row.sum / total.totalSum) * 100)}%
+                    </PercentItem>
+                  </SumItem>
+                </SumItemContainer>
+              )}
             </AmountItem>
           ))}
 
           <ButtonDelete tableRowIndex={index} />
         </TransactionRow>
       ))}
-      <TableFoot footer={averageValues} /* dataMatrix={dataMatrixLine} */ />
+      <TableFoot footer={averageValues} totalSum={total} /* dataMatrix={dataMatrixLine} */ />
     </tbody>
   );
 }

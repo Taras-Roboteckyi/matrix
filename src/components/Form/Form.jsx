@@ -48,7 +48,7 @@ export const Form = () => {
 
   return (
     <Section>
-      <h2 className="form-title">Створення матриці</h2>
+      <h3 className="form-title">Створення матриці</h3>
 
       <form onSubmit={formik.handleSubmit} className="form">
         <div className="container-input">
