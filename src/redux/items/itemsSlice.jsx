@@ -5,8 +5,8 @@ const initialState = {
   line: [],
   average: '',
   matrix: null,
-  totalSum: false,
-  hover: null,
+  /* totalSum: false, */
+  /*  hover: null, */
 };
 
 const itemsReducer = createSlice({
@@ -98,13 +98,41 @@ const itemsReducer = createSlice({
       console.log(payload.totalSum + 1);
       state.totalSum = payload.totalSum + 1;
     }, */
-    hoverAmount: (state, { payload }) => {
+    /* hoverAmount: (state, { payload }) => {
       state.hover = payload;
+    }, */
+    addRow: (state, { payload }) => {
+      console.log(payload);
+      state.line.push(payload);
+
+      state.matrix = payload.map(item => item.amount).slice(0, payload.length - 1);
+
+      let array = [];
+      const line = state.line.map(element => {
+        return element.map(el => el.amount).slice(0, element.length - 1);
+      });
+      for (let column = 0; column < line[0]?.length; column += 1) {
+        let sum = 0;
+        for (let row = 0; row < line.length; row += 1) {
+          sum += line[row][column];
+        }
+
+        array[column] = Number((sum / line.length).toFixed(2));
+      }
+
+      state.average.averageValues = [
+        ...array,
+        (state.average.averageValues[state.average.averageValues.length - 1] = {
+          totalSum:
+            state.average.averageValues[state.average.averageValues.length - 1].totalSum +
+            payload[payload.length - 1].sum,
+        }),
+      ];
     },
   },
 });
 
-export const { dataForm, dataMatrix, increment, deleteRow, addTotalSum, hoverAmount } =
+export const { dataForm, dataMatrix, increment, deleteRow, addTotalSum, hoverAmount, addRow } =
   itemsReducer.actions;
 
 export const reducer = combineReducers({

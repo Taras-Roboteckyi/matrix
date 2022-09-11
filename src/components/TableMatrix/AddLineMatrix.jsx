@@ -1,27 +1,33 @@
+import { nanoid } from 'nanoid';
+
+import { useSelector } from 'react-redux';
+import { ItemsSelectors } from '../../redux/items';
+
 import AddButton from '../AddButton/AddButton';
 
 export function AddLineMatrix() {
-  /* const dataMatrixLine = useSelector(ItemsSelectors.getDataMatrixLine);
+  const dataForm = useSelector(ItemsSelectors.getDataForm);
+  const dataLine = useSelector(ItemsSelectors.getDataMatrixLine);
 
-  if (dataMatrixLine.length === 0) {
-    return null;
-  }
-  const lineIndexArray = data => [...data[0]];
+  const column = dataForm.column;
 
-  const lineIndex = lineIndexArray(dataMatrixLine); */
-  /* console.log('lineIndex', lineIndex);
-  console.log('dataMatrixLine', dataMatrixLine); */
+  //Створюєм новий рядок для матриці
+
+  const newLine = () => {
+    let line = [];
+    for (let n = 0; n < column; n++) {
+      line[n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 1) + 1) }; //Створюєм значення amount
+    }
+    const sum = line.reduce((previousValue, number) => {
+      return previousValue + number.amount;
+    }, 0);
+    line.push({ id: nanoid(), sum });
+    return line;
+  };
+
   return (
     <tfoot>
-      <tr>
-        <AddButton />
-
-        {/*   <td> Додати </td>
-        <td> новий </td>
-        <td> рядок </td>
-        <td> до </td>
-        <td> таблиці </td> */}
-      </tr>
+      <tr>{dataLine.length > 0 && <AddButton addLine={newLine} />}</tr>
     </tfoot>
   );
 }

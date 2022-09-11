@@ -1,33 +1,20 @@
 import { FcAddRow } from 'react-icons/fc';
-import { useState } from 'react';
+/* import { useState } from 'react'; */
 import { useDispatch } from 'react-redux';
 
 import { ItemsSlice } from '../../redux/items';
 import { Container, TextHover, ContainerIcon } from './AddButton.styled';
 
 export default function AddButton(props) {
-  const [isHover, setIsHover] = useState(false);
   const dispatch = useDispatch();
-  const { tableRowIndex } = props;
-
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
+  const { addLine } = props;
 
   return (
     <Container>
       <ContainerIcon>
-        <FcAddRow
-          size="50px"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onClick={() => dispatch(ItemsSlice.deleteRow(tableRowIndex))}
-        />
+        <FcAddRow size="50px" onClick={() => dispatch(ItemsSlice.addRow(addLine()))} />
       </ContainerIcon>
-      <TextHover>- Додайте рядок до таблиці</TextHover>
+      <TextHover>- Додати рядок до таблиці</TextHover>
     </Container>
   );
 }
