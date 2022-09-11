@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ItemsSelectors, ItemsSlice } from '../../redux/items';
-import { TableRow } from './MatrixTableRow';
+
 import { TableFoot } from './MatrixTableFoot';
 import ButtonDelete from '../ButtonDelete/ButtonDelete';
 
@@ -13,6 +13,8 @@ import {
   AmountContainer,
   SumItemContainer,
   PercentItem,
+  PercentContainer,
+  PercentItemContainer,
 } from './MartixTable.styled';
 
 export function TableBody() {
@@ -120,12 +122,11 @@ export function TableBody() {
               )}
               {row.sum && (
                 <SumItemContainer>
-                  <SumItem /* key={indexItem} */>
-                    {row.sum}
-                    <PercentItem calc={(row.sum / total.totalSum) * 100}>
-                      {Math.ceil((row.sum / total.totalSum) * 100)}%
-                    </PercentItem>
-                  </SumItem>
+                  <SumItem>{row.sum}</SumItem>
+                  <PercentItemContainer>
+                    <PercentItem>{Math.ceil((row.sum / total.totalSum) * 100)}%</PercentItem>
+                    <PercentContainer calc={(row.sum / total.totalSum) * 100}></PercentContainer>
+                  </PercentItemContainer>
                 </SumItemContainer>
               )}
             </AmountItem>
@@ -134,6 +135,7 @@ export function TableBody() {
           <ButtonDelete tableRowIndex={index} />
         </TransactionRow>
       ))}
+
       <TableFoot footer={averageValues} totalSum={total} /* dataMatrix={dataMatrixLine} */ />
     </tbody>
   );
