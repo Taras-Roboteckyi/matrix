@@ -1,18 +1,14 @@
 import { nanoid } from 'nanoid';
-/* import { useEffect } from 'react'; */
+
 import { useSelector } from 'react-redux';
 import { ItemsSelectors } from '../redux/items';
 
 export default function Matrix() {
   const dataForm = useSelector(ItemsSelectors.getDataForm);
 
-  /*  console.log('dataForm : ', dataForm); */
-
-  /*  useEffect(() => {}, []); */
-
   const line = dataForm.row;
   const column = dataForm.column;
-  /* const x = 3; */
+
   let result = [];
 
   ///////////////Створюєм матрицю////////////
@@ -25,14 +21,14 @@ export default function Matrix() {
         result[m][n] = { id: nanoid(), amount: Math.floor(Math.random() * (1000 - 1) + 1) }; //Створюєм значення amount
       }
     }
-    /* console.log('matrixBasis: ', result); */
+
     return result;
   };
 
   ///////Знаходим суму рядків матриці///////////////
 
   const sum = () => {
-    let sumArray = []; // тимчасова змінна зовні обявлена зовні області розрахунків (або стейт, як в мене по логіці)
+    let sumArray = []; // тимчасова змінна  області розрахунків
 
     for (let i = 0; i < line; i++) {
       let sum = 0;
@@ -44,8 +40,6 @@ export default function Matrix() {
 
       result[i].push({ id: nanoid(), sum: sumArray[i] }); // додаєм обєкт з порахованою сумою по рядку
     }
-
-    /* console.log('result: ', result); */
 
     return result;
   };
@@ -59,7 +53,6 @@ export default function Matrix() {
       let average = 0;
 
       for (let row = 0; row < line; row += 1) {
-        /* console.log('average: ', result); */
         average += result[row][rowMatrix].amount; //вказує поле по якому рахуєш
       }
       const averageValue = Number((average / result.length).toFixed(2));
@@ -83,23 +76,15 @@ export default function Matrix() {
         }, 0);
     };
     const Total = totalMatrix(result);
-    /* console.log('Total', Total); */
 
     result = [...result, { averageValues: [...tempArray, { totalSum: Total }] }]; // розпиляємо і додаємо масив з середнім арифметичним і загальну суму
 
-    /* console.log('averageValue: ', result); */
     return result;
   };
-
-  /* console.log('matrix: ', result) */
 
   matrixBasis();
   sum();
   average();
-
-  /* console.log('matrix: ', matrixBasis());
-  console.log('average: ', average());
-  console.log('sum: ', sum()); */
 
   return result;
 }

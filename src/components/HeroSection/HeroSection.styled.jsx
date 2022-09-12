@@ -25,7 +25,6 @@ export const HeroText = styled.p`
   font-size: 20px;
   line-height: ${({ theme: { lineHeight } }) => lineHeight.verdanaHeight};
 
-  /* text-align: center; */
   color: ${({ theme: { colors } }) => colors.$black};
   margin-bottom: 20px;
 `;
@@ -52,7 +51,6 @@ export const Text = styled.p`
   font-size: 20px;
   line-height: ${({ theme: { lineHeight } }) => lineHeight.$gothamPro};
 
-  /* text-align: center; */
   color: ${({ theme: { colors } }) => colors.$black};
   margin-bottom: 10px;
 `;

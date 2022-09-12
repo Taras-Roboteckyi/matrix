@@ -1,5 +1,4 @@
 import { FcAddRow } from 'react-icons/fc';
-/* import { useState } from 'react'; */
 import { useDispatch } from 'react-redux';
 
 import { ItemsSlice } from '../../redux/items';

@@ -1,29 +1,12 @@
 import PropTypes from 'prop-types';
-/* import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react'; */
-
-/* import { totalMatrix } from '../../utils/matrix'; */
-/* import { ItemsSlice, ItemsSelectors } from '../../redux/items'; */
 
 import { TransactionRow, TransactionItem, AverageItem, Total } from './MartixTable.styled';
 
 export function TableFoot(props) {
-  /* const totalSum = useSelector(ItemsSelectors.getTotalSum); */
-  /* const dispatch = useDispatch(); */
   const averageValues = props.footer;
   const totalSum = props.totalSum;
-  /* const dataMatrixTable = props.dataMatrix; */
 
-  /* const total = totalMatrix(dataMatrixTable); */
-
-  /* useEffect(() => {
-    dispatch(ItemsSlice.addTotalSum(total));
-  }, [dispatch, total]); */
-
-  console.log('averageValues', averageValues);
   const textAverage = 'Середнє значення по стовчиках';
-
-  /*  console.log('total', total); */
 
   return (
     <TransactionRow>

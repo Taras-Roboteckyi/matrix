@@ -8,8 +8,7 @@ export const Container = styled.td`
   top: 5px;
   left: -50px;
   width: 50px;
-  /*   height: 30px; */
-  /* background-color: rgb(0, 191, 255); */
+
   color: ${({ theme: { colors } }) => colors.$blue};
 
   transition: color cubic-bezier(0.4, 0, 0.2, 1) 500ms;

@@ -20,30 +20,21 @@ import {
 
 export function TableBody() {
   const dataMatrixLine = useSelector(ItemsSelectors.getDataMatrixLine);
+
   const { averageValues } = useSelector(ItemsSelectors.getDataMatrixAverage);
-  const [isHoverAmount, setIsHoverAmount] = useState(null);
+
   const diapasonX = useSelector(ItemsSelectors.getDataForm);
 
-  /* const { row, index, mouseEnter, mouseLeave, hover } = props; */
-  /* const totalSum = useSelector(ItemsSelectors.getTotalSum); */
+  const [isHoverAmount, setIsHoverAmount] = useState(null);
+
   const dispatch = useDispatch();
-  /* const line = row.slice(0, row.length - 1); */
 
   const total = averageValues[averageValues.length - 1]; /////Знаходим загальну суму матриці
 
   const increment = indexNumber => indexNumber + 1; //Додаєм нумерацію клітинок-ячейок
 
-  /* console.log('totalSum', totalSum); */
-
-  /* console.log('dataMatrixLine ', dataMatrixLine); */
-  /* useEffect(() => {}, [dataMatrixLine, diapasonX.range]); */
-  console.log('dataMatrixLine ', dataMatrixLine);
-  /* 
-  if (dataMatrixLine.length === 0) {
-    return null;
-  } */
-
   /////////Фільтруєм матрицю тільки по значенню amount/////////////////////
+
   const arrayMatrix = dataMatrixLine
     .reduce((allTags, item) => {
       allTags.push(...item);
@@ -51,14 +42,10 @@ export function TableBody() {
       return allTags;
     }, [])
     .filter(({ amount }) => amount);
-  //console.log('arrayMatrix', arrayMatrix);
 
   /////////Шукаєм функцією підсвічені клітинки-ячейки/////////////////////
 
   const handleMouseEnterAmount = idAmount => {
-    //console.log(idAmount);
-    //console.log('dataMatrix', dataMatrix);
-
     const electIdAmount = arrayMatrix.find(el => el.id === idAmount);
 
     const arrayOfTemporaryAmount = arrayMatrix.reduce((arr, item) => {
@@ -67,37 +54,25 @@ export function TableBody() {
       } else {
         const differenceAmounts = Math.abs(item.amount - electIdAmount?.amount);
         const newAmount = { ...item, different: differenceAmounts }; //додаєм різницю чисел щоб знайти необхідні числа
-        //delete newAmount.amount;
-        //console.log('arr', arr);
+
         return [...arr, newAmount];
       }
     }, []);
 
-    ///////Сортруєм новий масив і обрізаєм Х клітинок-ячейок//////////////
+    ///////Сортуєм новий масив і обрізаєм Х клітинок-ячейок//////////////
 
     const newArrayOnMouseEnter = [...arrayOfTemporaryAmount]
       .sort((a, b) => {
         return a.different - b.different;
       })
       .slice(0, diapasonX.range);
-    /* console.log('newArrayOnMouseEnter', newArrayOnMouseEnter); */
-    setIsHoverAmount(newArrayOnMouseEnter);
 
-    //return newArrayOnMouseEnter;
+    setIsHoverAmount(newArrayOnMouseEnter);
   };
-  console.log('isHoverAmount', isHoverAmount);
 
   return (
     <tbody>
       {dataMatrixLine.map((line, index) => (
-        /*  <TableRow
-          key={index}
-          row={line}
-          index={index}
-          mouseEnter={handleMouseEnterAmount}
-          mouseLeave={setIsHoverAmount}
-          hover={b}
-        /> */
         <TransactionRow key={index}>
           {<AverageItem>{increment(index)}</AverageItem>}
           {line.map((row, indexItem) => (
@@ -137,7 +112,7 @@ export function TableBody() {
         </TransactionRow>
       ))}
 
-      <TableFoot footer={averageValues} totalSum={total} /* dataMatrix={dataMatrixLine} */ />
+      <TableFoot footer={averageValues} totalSum={total} />
     </tbody>
   );
 }

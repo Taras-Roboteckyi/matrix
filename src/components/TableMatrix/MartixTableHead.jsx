@@ -14,8 +14,7 @@ export function TableHeader() {
   const lineIndexArray = data => [...data[0]];
 
   const lineIndex = lineIndexArray(dataMatrixLine);
-  /* console.log('lineIndex', lineIndex);
-  console.log('dataMatrixLine', dataMatrixLine); */
+
   return (
     <TableHeaderStyle>
       <TransactionRow>

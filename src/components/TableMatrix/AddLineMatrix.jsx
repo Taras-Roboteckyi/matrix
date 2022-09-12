@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
-
 import { useSelector } from 'react-redux';
+
 import { ItemsSelectors } from '../../redux/items';
 
 import AddButton from '../AddButton/AddButton';

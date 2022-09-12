@@ -5,8 +5,6 @@ const initialState = {
   line: [],
   average: '',
   isReducerSpinner: false,
-  /* totalSum: false, */
-  /*  hover: null, */
 };
 
 const itemsReducer = createSlice({
@@ -99,18 +97,9 @@ const itemsReducer = createSlice({
       state.isReducerSpinner = false;
     },
 
-    /*  addTotalSum: (state, { payload }) => {
-      console.log(payload.totalSum + 1);
-      state.totalSum = payload.totalSum + 1;
-    }, */
-    /* hoverAmount: (state, { payload }) => {
-      state.hover = payload;
-    }, */
     addRow: (state, { payload }) => {
       state.isReducerSpinner = true;
       state.line.push(payload);
-
-      /* state.matrix = payload.map(item => item.amount).slice(0, payload.length - 1); */
 
       let array = [];
       const line = state.line.map(element => {
@@ -139,8 +128,7 @@ const itemsReducer = createSlice({
   },
 });
 
-export const { dataForm, dataMatrix, increment, deleteRow, addTotalSum, hoverAmount, addRow } =
-  itemsReducer.actions;
+export const { dataForm, dataMatrix, increment, deleteRow, addRow } = itemsReducer.actions;
 
 export const reducer = combineReducers({
   items: itemsReducer.reducer,
