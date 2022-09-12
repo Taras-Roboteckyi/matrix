@@ -9,6 +9,7 @@ import MatrixTable from '../components/TableMatrix/MartixTable';
 
 export default function HomePage() {
   const data = useSelector(ItemsSelectors.getDataForm);
+  const isLoading = useSelector(ItemsSelectors.getIsReducerSpinner);
   const dispatch = useDispatch();
   const dataMatrix = Matrix();
 
@@ -19,11 +20,12 @@ export default function HomePage() {
     return null;
   } */
 
-  /* console.log('dataMatrix', dataMatrix); */
+  console.log('isLoading', isLoading);
   return (
     <>
       <HeroSection />
       <Form />
+      {isLoading && <p>Donloading..........</p>}
       {data.row && <MatrixTable />}
     </>
   );

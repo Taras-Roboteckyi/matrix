@@ -56,6 +56,9 @@ export const AmountItem = styled.td`
   border: 1px solid #2a2a2a;
   text-align: center;
   cursor: pointer;
+  /*  :nth-last-child(n + 2) {
+    cursor: pointer;
+  } */
   /* :nth-last-child(n + 2) {
     background-color: ${props => (props.activeClassName ? 'pink' : 'inherit')};
     :hover {
@@ -70,7 +73,7 @@ export const AmountContainer = styled.div`
   padding-top: 10%;
   padding-bottom: 10%;
   /* text-align: center; */
-  /* cursor: pointer; */
+  cursor: pointer;
 
   background-color: ${props => (props.activeClassName ? 'pink' : 'inherit')};
   :hover {
@@ -83,42 +86,49 @@ export const SumItemContainer = styled.div`
   height: 38px;
 
   text-align: center; */
-  /* :hover {
+  /*  :hover {
     background-color: pink;
   } */
 `;
 
 export const PercentItemContainer = styled.div`
-  /* padding: 0;
-  height: 38px;
-  opacity: 1; */
-  text-align: center;
-  /*  :hover {
-    background-color: pink;
-    opacity: 1;
-  } */
-`;
-
-export const PercentItem = styled.div`
-  /* position: absolute;
-  top: 0;
-  left: 0px; */
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
   width: 100%;
-  height: 38px;
+  /* padding: 0;
+  
+  opacity: 1; */
   text-align: center;
 
   /* opacity: 0; */
-  background-color: rgba(33, 150, 243, 0.9);
+  :hover {
+    background-color: rgba(33, 150, 243, 0.9);
+    opacity: 1;
+  }
+`;
+
+export const PercentItem = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0px;
+  width: 100%;
+  /* height: 38px; */
+  text-align: center;
+  z-index: 999;
+  opacity: 0;
+  /* background-color: rgba(33, 150, 243, 0.9); */
   color: #ffffff;
-  /* transform: translateY(0%); */
+  transform: translateY(100%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   /* overflow: auto; */
-  /* :hover {
+  ${PercentItemContainer}:hover & {
     opacity: 1;
-    transform: translateY(100%);
+    transform: translateY(0%);
 
-    background-color: ${({ theme: { colors } }) => colors.$red};
-  } */
+    /* background-color: ${({ theme: { colors } }) => colors.$red}; */
+  }
 `;
 export const PercentContainer = styled.div`
   position: absolute;
@@ -132,10 +142,14 @@ export const PercentContainer = styled.div`
   opacity: 0;
   background-color: rgba(33, 150, 243, 0.9);
   color: #ffffff;
-  /* transform: translateY(0%); */
+  transform: translateY(100%);
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  background-color: ${({ theme: { colors } }) => colors.$orange};
+  ${PercentItemContainer}:hover & {
+    opacity: 1;
+    transform: translateY(0%);
+    background-color: ${({ theme: { colors } }) => colors.$red};
+  }
   /*  :hover {
     opacity: 1;
     transform: translateY(100%);
@@ -145,7 +159,7 @@ export const PercentContainer = styled.div`
 `;
 
 export const SumItem = styled.div`
-  height: 38px;
+  height: 32px;
   padding-top: 6px;
   /*  padding-top: 8%;
   padding-bottom: 8%; */
@@ -153,11 +167,11 @@ export const SumItem = styled.div`
 
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   /* overflow: auto; */
-  :hover {
+  /*  :hover {
     opacity: 0;
-    /* transform: translateY(0);
-    z-index: -2; */
-  }
+    transform: translateY(0);
+    z-index: -2;
+  } */
 `;
 
 export const Total = styled.td`

@@ -4,7 +4,7 @@ const initialState = {
   data: { row: null, column: null, range: null },
   line: [],
   average: '',
-  matrix: null,
+  isReducerSpinner: false,
   /* totalSum: false, */
   /*  hover: null, */
 };
@@ -18,14 +18,15 @@ const itemsReducer = createSlice({
     },
 
     dataMatrix: (state, action) => {
-      /* state.matrix = action.payload; */
-      /* console.log('dataMatrix', action.payload); */
+      state.isReducerSpinner = true;
       state.line = action.payload.slice(0, action.payload.length - 1);
       state.average = action.payload[action.payload.length - 1];
+      state.isReducerSpinner = false;
     },
 
     increment: (state, action) => {
-      /* console.log(action.payload); */
+      state.isReducerSpinner = true;
+
       state.line[action.payload.indexRow] = state.line
         .find((_, index) => index === action.payload.indexRow)
         .map(element => {
@@ -50,10 +51,12 @@ const itemsReducer = createSlice({
       state.average.averageValues[state.average.averageValues.length - 1] = {
         totalSum: state.average.averageValues[state.average.averageValues.length - 1].totalSum + 1,
       };
+
+      state.isReducerSpinner = false;
     },
 
     deleteRow: (state, { payload }) => {
-      /* console.log(payload); */
+      state.isReducerSpinner = true;
 
       state.line = state.line.filter((_, index) => index !== payload);
 
@@ -92,6 +95,8 @@ const itemsReducer = createSlice({
             }, 0),
         }),
       ];
+
+      state.isReducerSpinner = false;
     },
 
     /*  addTotalSum: (state, { payload }) => {
@@ -102,10 +107,10 @@ const itemsReducer = createSlice({
       state.hover = payload;
     }, */
     addRow: (state, { payload }) => {
-      console.log(payload);
+      state.isReducerSpinner = true;
       state.line.push(payload);
 
-      state.matrix = payload.map(item => item.amount).slice(0, payload.length - 1);
+      /* state.matrix = payload.map(item => item.amount).slice(0, payload.length - 1); */
 
       let array = [];
       const line = state.line.map(element => {
@@ -128,6 +133,8 @@ const itemsReducer = createSlice({
             payload[payload.length - 1].sum,
         }),
       ];
+
+      state.isReducerSpinner = false;
     },
   },
 });

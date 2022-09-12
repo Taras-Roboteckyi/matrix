@@ -22,6 +22,8 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, ItemsSlice.reducer);
 
+////////Store///////////////////
+
 const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware =>
@@ -33,18 +35,5 @@ const store = configureStore({
 });
 
 let persistor = persistStore(store);
-
-////////Store///////////////////
-/* const store = configureStore({
-  reducer: {
-    matrix: ItemsSlice.reducer,
-  },
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
-
-let persistor = persistStore(store); */
 
 export { store, persistor };
